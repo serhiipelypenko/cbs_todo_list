@@ -41,7 +41,7 @@ function createListItem(title) {
     li.textContent = title;
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
+    deleteBtn.textContent = "Прибрати";
     deleteBtn.addEventListener("click", () => li.remove());
 
     li.addEventListener("click", () => li.classList.toggle("completed"));
