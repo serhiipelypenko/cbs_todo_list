@@ -29,9 +29,9 @@ class TodoListView {
         li.dataset.id_task = id;
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Прибрати";
-        deleteBtn.addEventListener("click", () => this.controller.handlerRemoveTask(li));
+        deleteBtn.addEventListener("click", () => this.controller.handlerRemoveTask(li), true);
 
-        li.addEventListener("click", () => this.controller.handlerChangeStatusTask(li));
+        li.addEventListener("click", (event) => this.controller.handlerChangeStatusTask(event,li));
         li.appendChild(deleteBtn);
 
         return li;

@@ -42,7 +42,8 @@ class TodoListController {
         }
     }
 
-    handlerChangeStatusTask(li){
+    handlerChangeStatusTask(event, li){
+        if(event.target.nodeName.toLowerCase() !== 'li') return false;
         this.model.updateStatus(li.dataset.id_task);
         li.classList.toggle("completed");
         console.log('After update status');
