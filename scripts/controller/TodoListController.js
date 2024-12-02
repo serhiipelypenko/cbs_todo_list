@@ -1,6 +1,7 @@
 class TodoListController {
 
     model;
+    sort_arrow = false;
 
     constructor(model) {
         this.model = model;
@@ -19,6 +20,36 @@ class TodoListController {
     initHandlers(){
         document.body.querySelector('ul').
         addEventListener('click', (event) => this.handlerTasks(event));
+
+        document.getElementById('show_all').addEventListener('click', this.showAllTask.bind(this));
+        document.getElementById('show_active').addEventListener('click', this.showActiveTask.bind(this));
+        document.getElementById('sort_by_date').addEventListener('click', this.sortByDateTask.bind(this));
+        document.getElementById('clear_all').addEventListener('click', this.clearAllTasks.bind(this));
+    }
+
+    showAllTask(){
+        this.model.allTask();
+    }
+
+    showActiveTask(){
+        this.model.activeTask();
+    }
+
+    sortByDateTask(){
+        if(this.model.sort_type === 'desc'){
+            this.model.sort_type = 'asc';
+            this.sort_arrow = false;
+        }else{
+            this.model.sort_type = 'desc';
+            this.sort_arrow = true;
+        }
+        const arrow = document.getElementById("arrow");
+        arrow.textContent = this.sort_arrow ? "↑" : "↓";
+        this.model.sortByTime();
+    }
+
+    clearAllTasks(){
+        this.model.removeAllTasks();
     }
 
     handlerTasks(event){
@@ -41,13 +72,4 @@ class TodoListController {
         this.handlerAddNewTask();
     }
 
-}
-
-
-let isAscending = false;
-
-function toggleSort() {
-    const arrow = document.getElementById("arrow");
-    isAscending = !isAscending;
-    arrow.textContent = isAscending ? "↑" : "↓";
 }
