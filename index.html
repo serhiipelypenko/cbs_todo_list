@@ -9,6 +9,12 @@
 <body>
 <div class="container">
   <h1>To-Do List</h1>
+  <div class="sort-container">
+    <button id="show_all">Показати всі таски</button>
+    <button id="show_active">Показати активні</button>
+    <button id="sort_by_date" onclick="toggleSort()">Сортувати по даті  <span id="arrow">↓</span></button>
+    <button id="clear_all">Видалити всі таски</button>
+  </div>
   <form id="task-form">
     <input type="text" id="task-input" placeholder="Додати нове завдання..." required>
     <button type="submit" class="add-btn">Додати</button>

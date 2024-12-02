@@ -87,6 +87,12 @@ form {
     background-color: #d4edda;
 }
 
+.task-list li p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0px;
+}
 .task-list li button {
     background-color: #dc3545;
     color: white;
@@ -100,4 +106,35 @@ form {
 
 .task-list li button:hover {
     background-color: #c82333;
+}
+
+
+
+.sort-container {
+    text-align: center;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.sort-container button {
+    font-size: 12px;
+    padding: 3px 3px;
+    background-color: #937e7e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    float: left;
+    margin: 3px;
+}
+
+.sort-container button:hover {
+    background-color: #674b4b;
+}
+
+.sort-container button span {
+    font-weight: bold;
 }

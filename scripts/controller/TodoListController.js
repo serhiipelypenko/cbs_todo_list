@@ -50,7 +50,7 @@ class TodoListController {
         this.showAllTasks();
     }
 
-    showAllTasks(){
+    showAllTasks(){k
         console.log(this.model.tasks);
     }
 
@@ -60,4 +60,13 @@ class TodoListController {
         this.showAllTasks();
     }
 
+}
+
+
+let isAscending = false;
+
+function toggleSort() {
+    const arrow = document.getElementById("arrow");
+    isAscending = !isAscending;
+    arrow.textContent = isAscending ? "↑" : "↓";
 }

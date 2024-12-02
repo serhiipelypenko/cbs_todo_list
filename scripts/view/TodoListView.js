@@ -25,7 +25,9 @@ class TodoListView {
     createListItem(title,id) {
 
         const li = document.createElement("li");
-        li.textContent = title;
+        const paragraph = document.createElement("p");
+        paragraph.textContent = title;
+        li.append(paragraph);
         li.dataset.id_task = id;
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Прибрати";
