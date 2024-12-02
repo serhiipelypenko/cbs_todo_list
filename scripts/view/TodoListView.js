@@ -1,41 +1,28 @@
 class TodoListView {
 
-    controller;
-
     constructor() {
     }
 
-    set controller(controller){
-        this.controller = controller;
-    }
-    createListDefault(task,id){
-        let li = this.createListItem(task.title,id);
-        if(task.done){
-            li.classList.add("completed");
-        }
-        taskList.appendChild(li);
-    }
-
-    createList(title,id){
-        let li = this.createListItem(title,id);
-        taskList.appendChild(li);
-    }
-
-
-    createListItem(title,id) {
-
+    createListItem(task) {
         const li = document.createElement("li");
         const paragraph = document.createElement("p");
-        paragraph.textContent = title;
+        paragraph.textContent = task['title'];
         li.append(paragraph);
-        li.dataset.id_task = id;
+        li.dataset.id_task = task['id'];
+        if(task['done']){
+            li.classList.add('completed');
+        }
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Прибрати";
-        deleteBtn.addEventListener("click", () => this.controller.handlerRemoveTask(li), true);
-
-        li.addEventListener("click", (event) => this.controller.handlerChangeStatusTask(event,li));
         li.appendChild(deleteBtn);
-
         return li;
+    }
+
+    renderTodoList(data){
+        taskList.innerHTML = '';
+        for (let i = 0; i < data.length; i++) {
+            let li = this.createListItem(data[i]);
+            taskList.appendChild(li);
+        }
     }
 }

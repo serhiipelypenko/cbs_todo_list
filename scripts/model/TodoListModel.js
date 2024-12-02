@@ -1,24 +1,31 @@
 class TodoListModel {
     tasks =[];
-
-    constructor() {
+    view;
+    constructor(view) {
+        this.view = view;
     }
 
-    addDefaultTasks(){
-        this.tasks.push(new TaskModel('Купити хліб',true));
-        this.tasks.push(new TaskModel('Забрати дитину з садочка',false));
-        this.tasks.push(new TaskModel('Накормити черепаху',false));
-    }
     addTask(title){
-        return this.tasks.push(new TaskModel(title));
+        this.tasks.push(new TaskModel(title));
+        this.view.renderTodoList(this.tasks);
     }
 
     removeTask(id){
-        this.tasks.splice(id,1);
+        for (let i = 0; i < this.tasks.length; i++) {
+            if(this.tasks[i]['id'] === id){
+                this.tasks.splice(i,1);
+            }
+        }
+        this.view.renderTodoList(this.tasks);
     }
 
     updateStatus(id){
-        this.tasks[id].done = !(this.tasks[id].done);
+        for (let i = 0; i < this.tasks.length; i++) {
+            if(this.tasks[i]['id'] === id){
+                this.tasks[i].done = !(this.tasks[i].done);
+            }
+        }
+        this.view.renderTodoList(this.tasks);
     }
     get tasks(){
         return this.tasks;
