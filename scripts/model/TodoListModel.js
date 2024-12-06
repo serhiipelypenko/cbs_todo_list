@@ -7,12 +7,18 @@ class TodoListModel {
 
     constructor(view) {
         this.view = view;
+        let tasks_todo = localStorage.getItem('tasks_todo');
+        if(tasks_todo){
+            this.original_tasks = JSON.parse(tasks_todo) || [];
+            this.allTask();
+        }
     }
 
     addTask(title){
         let new_task = new TaskModel(title);
         this.tasks.push(new_task);
         this.original_tasks.push(new_task);
+        this.updateStorage();
         this.view.renderTodoList(this.tasks);
     }
 
@@ -27,12 +33,14 @@ class TodoListModel {
                 this.original_tasks.splice(i,1);
             }
         }
+        this.updateStorage();
         this.view.renderTodoList(this.tasks);
     }
 
     removeAllTasks(){
         this.tasks = [];
         this.original_tasks = [];
+        this.updateStorage();
         this.view.renderTodoList(this.tasks);
     }
 
@@ -46,7 +54,7 @@ class TodoListModel {
     }
 
     allTask(){
-        this.tasks = Object.assign(this.original_tasks);
+        this.tasks = [...this.original_tasks];//Object.assign(this.original_tasks);
         this.view.renderTodoList(this.tasks);
     }
 
@@ -67,6 +75,7 @@ class TodoListModel {
         }
         this.tasks.sort(this.sortByDate.bind(this));
         this.original_tasks.sort(this.sortByDate.bind(this));
+        this.updateStorage();
         this.view.renderTodoList(this.tasks);
     }
 
@@ -80,6 +89,9 @@ class TodoListModel {
         return 0;
     }
 
+    updateStorage(){
+        localStorage.setItem('tasks_todo',JSON.stringify(this.original_tasks));
+    }
     set sort_type(value){
         this.sort_type = value;
     }
